@@ -1,6 +1,9 @@
 from django.db import models
 from Profile.models import Profile
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
 from taggit.managers import TaggableManager
+from django.template.defaultfilters import slugify
 
 
 # What do you think that EOM stands for?
@@ -61,6 +64,17 @@ class Music(models.Model):
 
     def __str__(self):
         return self.music_name
+    #
+    # def save(self, *args, **kwargs):
+    #     self.slug = slugify(f"{self.music_name}-{self.ID}")
+    #     super().save()
+
+
+@receiver(pre_save, sender=Music)
+def slug_setter(sender, instance, *args, **kwargs):
+    # It will be activated by superuser.
+    instance.slug = slugify(f"{instance.music_name}-{instance.release_date}-{instance.user}")
+    # instance.save()
 
 
 # Explicit table to make the relation more clear and using CASCADE deleting method.
