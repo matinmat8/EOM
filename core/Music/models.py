@@ -53,7 +53,7 @@ class Music(models.Model):
     music_genre = models.ForeignKey(Genre, on_delete=models.SET_NULL, null=True)
     release_date = models.DateField()
     # When the post has published.
-    post_date = models.DateField()
+    pub_date = models.DateField()
     cover_art = models.FileField(upload_to='media/images/cover_art/')
     music = models.FileField(upload_to='media/music/')
     lyrics = models.TextField(blank=True, null=True)
