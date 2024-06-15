@@ -72,9 +72,8 @@ class Music(models.Model):
 
 @receiver(pre_save, sender=Music)
 def slug_setter(sender, instance, *args, **kwargs):
-    # It will be activated by superuser.
-    instance.slug = slugify(f"{instance.music_name}-{instance.release_date}-{instance.user}")
-    # instance.save()
+    if not instance.slug:
+        instance.slug = slugify(f"{instance.music_name}-{instance.release_date}-{instance.user}")
 
 
 # Explicit table to make the relation more clear and using CASCADE deleting method.
