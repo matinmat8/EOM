@@ -70,6 +70,22 @@ class Music(models.Model):
     #     super().save()
 
 
+class PlayList(models.Model):
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    genre = models.ForeignKey(Genre, on_delete=models.CASCADE, null=True, blank=True)
+    name = models.CharField(max_length=450)
+    description = models.TextField(blank=True, null=True)
+    music = models.ManyToManyField(Music, related_name="playlists")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return self.name
+
+
 @receiver(pre_save, sender=Music)
 def slug_setter(sender, instance, *args, **kwargs):
     if not instance.slug:
