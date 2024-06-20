@@ -63,11 +63,7 @@ class Music(models.Model):
     tag = TaggableManager()
 
     def __str__(self):
-        return self.music_name
-    #
-    # def save(self, *args, **kwargs):
-    #     self.slug = slugify(f"{self.music_name}-{self.ID}")
-    #     super().save()
+        return f"{str(self.ID)} : {self.music_name}"
 
 
 class PlayList(models.Model):

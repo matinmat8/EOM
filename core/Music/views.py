@@ -5,7 +5,15 @@ from django.views.generic import DetailView
 from .models import Music
 
 
-def detail_getter(request, id):
-    music = Music.objects.get(ID=id)
-    result = increment_post_view_count.delay(music_id=id)
-    return JsonResponse({'task_id': result.task_id})
+class DetailGetter(DetailView):
+    # url_name = 'music_detail'
+    template_name = 'Music/detailpage.html'
+    model = Music
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        post = self.get_object()
+        increment_post_view_count.apply_async(args=([post.ID])).get()
+        return context
+
+
