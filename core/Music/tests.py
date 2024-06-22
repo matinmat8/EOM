@@ -61,7 +61,7 @@ class MusicModelTest(TestCase):
         self.assertFalse(music_without_singer.singer.exists())
 
     # Inserting Into & Deleting playlists testing.
-    def test_getting_profile_playlists(self):
+    def test_adding_deleting_profile_playlists(self):
         user = User.objects.create_user("UserTest", password="12345678")
         profile = Profile.objects.create(user=user)
         music = Music.objects.get(music_name='Test Music')
