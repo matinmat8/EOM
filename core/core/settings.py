@@ -38,12 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # 'kombu.transport.django',
-    # 'django_celery_results',
+    # Third-party apps
     'taggit',
     'celery',
-    # 'click',
+    'rest_framework',
 
+    # Project's apps
     'Music',
     'Profile',
 ]
