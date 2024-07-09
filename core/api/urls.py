@@ -5,6 +5,6 @@ from api import views
 app_name = 'api'
 
 router = routers.DefaultRouter()
-router.register(r'Musics', views.MusicViewSet),
+router.register(r'musics', views.MusicViewSet, basename='music'),
 
 urlpatterns = router.urls
